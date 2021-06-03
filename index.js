@@ -3,12 +3,11 @@ const grid = document.querySelector('.grid')
 const scoreDisplay = document.getElementById('score')
 let squares = []
 
-//   28 * 28 = 784
-  // 0 - pac-dots
-  // 1 - wall
-  // 2 - ghost-lair
-  // 3 - power-pellet
-  // 4 - empty
+// 0 - pacdots
+// 1 - wall
+// 2 - ghost lair
+// 3 - powerpellets
+// 4 - empty
 
 const layout = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -38,30 +37,62 @@ const layout = [
     1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
     1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ]
+
 // create board
 function createBoard() {
     for (let i = 0; i < layout.length; i++) {
         //create a square
         const square = document.createElement('div')
-        //put the square in grid
+        //put  square in grid
         grid.appendChild(square)
+        //put square in squares array
         squares.push(square)
-
+        
+        
         if (layout[i] === 0) {
             squares[i].classList.add('pac-dot')
-    }   else if (layout[i] === 1) {
-        squares[i].classList.add('wall')
-    }   else if (layout[i] === 2) {
-        squares[i].classList.add('ghost-lair')
-    }   else if (layout[i] === 3) {
-        squares[i].classList.add('power-pellet')
-    }   else (layout[i] === 4) {
-        squares[i].classList.add('empty')
+        } else if (layout[i] === 1) {
+            squares[i].classList.add('wall')
+        } else if (layout[i] === 3) {
+            squares[i].classList.add('power-pellet')
+        }
     }
 }
 
 createBoard()
 
-console.log(squares.length)
+
+// CREATING PACMAN AND SET HIS DEFAULT POSITION @ GRID 490
+
+let pacmanCurrentIndex = 490
+squares[pacmanCurrentIndex].classList.add('pacman')
+
+// FUNCTION FOR ADD EVENT LISTENER WITH ARROW KEYS HOOKED
+
+function control(e) {
+    switch(e.keyCode) {
+
+        // DOWN
+        case 40:
+        console.log("pressed down")
+        break
+
+        // RIGHT
+        case 39:
+        console.log('pressed right')
+        break
+
+        // UP
+        case 38:
+        console.log('pressed up')
+        break
+
+        // LEFT
+        case 37:
+        console.log('pressed left')
+        break
+    }
+}
+document.addEventListener('keyup', control)
